@@ -1,0 +1,14 @@
+networks:
+  ollama-network:
+    driver: bridge
+    external: true
+
+services:
+  presentation-console:
+    container_name: presentation-console
+    build:
+      context: .
+      dockerfile: ./docker-compose.dev.yml
+    networks: 
+      - ollama-network
+    

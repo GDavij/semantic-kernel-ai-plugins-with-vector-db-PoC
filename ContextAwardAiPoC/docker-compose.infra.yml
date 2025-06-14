@@ -1,0 +1,36 @@
+version: '1.0'
+
+networks:
+  ollama-network:
+    driver: bridge
+
+volumes:
+  weaviate_data:
+  ollama:
+
+services:
+  vector-store-weaviate:
+    container_name: vector-store-weaviate
+    image: 'semitechnologies/weaviate:1.31.1'
+    networks: 
+      - ollama-network
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      ENABLE_API_BASED_MODULES: 'true'
+      CLUSTER_HOSTNAME: 'vector-store-weaviate'
+  
+  ollama:
+    container_name: ollama
+    image: ollama/ollama:latest
+    networks: 
+      - ollama-network
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    volumes:
+      - ollama:/root/.ollama
+  
