@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ai", "Core.Ai\Core.Ai.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.Ollama", "Adapter.Ollama\Adapter.Ollama.csproj", "{D480289C-DDA2-4C6A-9704-3E529DCDD011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Weaviate.Grpc", "Infra.Weaviate.Grpc\Infra.Weaviate.Grpc.csproj", "{6FE23272-4748-4635-B5D0-7A142DF00E13}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +24,5 @@ Global
 		{D480289C-DDA2-4C6A-9704-3E529DCDD011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D480289C-DDA2-4C6A-9704-3E529DCDD011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D480289C-DDA2-4C6A-9704-3E529DCDD011}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FE23272-4748-4635-B5D0-7A142DF00E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FE23272-4748-4635-B5D0-7A142DF00E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FE23272-4748-4635-B5D0-7A142DF00E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FE23272-4748-4635-B5D0-7A142DF00E13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
