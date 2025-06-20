@@ -11,6 +11,7 @@ volumes:
 services:
   vector-store-weaviate:
     container_name: vector-store-weaviate
+    hostname: vector-store-weaviate
     image: 'semitechnologies/weaviate:1.31.1'
     networks: 
       - ollama-network
@@ -24,7 +25,8 @@ services:
       CLUSTER_HOSTNAME: 'vector-store-weaviate'
   
   ollama:
-    container_name: ollama
+    container_name: ollama_sematic_kernel_api
+    hostname: ollama_sematic_kernel_api_localhost_test_docker_network
     image: ollama/ollama:latest
     networks: 
       - ollama-network
@@ -34,3 +36,11 @@ services:
     volumes:
       - ollama:/root/.ollama
   
+  open-telemetry-collector:
+    image: otel/opentelemetry-collector
+    networks:
+      - ollama-network
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-config.yaml:/etc/otel-collector-config.yaml
+

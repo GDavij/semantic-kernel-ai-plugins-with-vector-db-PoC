@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ai", "Core.Ai\Core.Ai.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.Ollama", "Adapter.Ollama\Adapter.Ollama.csproj", "{D480289C-DDA2-4C6A-9704-3E529DCDD011}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Tracing", "Infra.Tracing\Infra.Tracing.csproj", "{150525D6-20FE-4165-AF5C-A341B542F1CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{D480289C-DDA2-4C6A-9704-3E529DCDD011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D480289C-DDA2-4C6A-9704-3E529DCDD011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D480289C-DDA2-4C6A-9704-3E529DCDD011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{150525D6-20FE-4165-AF5C-A341B542F1CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{150525D6-20FE-4165-AF5C-A341B542F1CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{150525D6-20FE-4165-AF5C-A341B542F1CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{150525D6-20FE-4165-AF5C-A341B542F1CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,12 +1,14 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine3.21 AS publish
-WORKDIR /presentation-console
+﻿FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
+WORKDIR /console-publishing
 COPY . .
 
-RUN dotnet restore /presentation-console/Presentation.Console/Presentation.Console.csproj
-RUN dotnet publish -c Debug -o publish --no-restore /presentation-console/Presentation.Console/Presentation.Console.csproj
+RUN dotnet publish \
+           -c Debug \
+           -o publish \
+           /console-publishing/Presentation.Console/Presentation.Console.csproj
 
+FROM mcr.microsoft.com/dotnet/runtime:9.0-alpine AS runtime
+WORKDIR /console-app
+COPY --from=build /console-publishing/publish .
 
-FROM mcr.microsoft.com/dotnet/runtime:9.0-alpine3.21 AS runtime
-WORKDIR /app
-COPY --from=publish /presentation-console/publish .
-ENTRYPOINT ["dotnet", "ContextAwardAiPoC.Presentation.Console.dll"]
+ENTRYPOINT [ "dotnet", "Presentation.Console.dll" ]

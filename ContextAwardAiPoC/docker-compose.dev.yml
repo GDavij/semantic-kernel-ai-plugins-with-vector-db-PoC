@@ -8,7 +8,12 @@ services:
     container_name: presentation-console
     build:
       context: .
-      dockerfile: ./docker-compose.dev.yml
+      dockerfile: ./Presentation.Console/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: 'development'
     networks: 
       - ollama-network
+    depends_on:
+      - vector-store-weaviate
+      - ollama
     
