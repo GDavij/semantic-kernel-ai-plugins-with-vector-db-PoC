@@ -14,4 +14,8 @@
       <PackageReference Include="Microsoft.SemanticKernel.Connectors.Weaviate" Version="1.56.0-preview" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="GuardRails\" />
+    </ItemGroup>
+
 </Project>

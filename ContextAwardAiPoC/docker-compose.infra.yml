@@ -26,7 +26,7 @@ services:
   
   ollama:
     container_name: ollama_sematic_kernel_api
-    hostname: ollama_sematic_kernel_api_localhost_test_docker_network
+    hostname: ollama-semantic-kernel-api
     image: ollama/ollama:latest
     networks: 
       - ollama-network
@@ -34,7 +34,7 @@ services:
       - /dev/kfd
       - /dev/dri
     volumes:
-      - ollama:/root/.ollama
+      - /var/lib/docker/volumes/ollama/_data:/root/.ollama # Used this path hardcoded since, I already use ollama volume on my machine and by default it is created in docker lib path
   
   open-telemetry-collector:
     image: otel/opentelemetry-collector

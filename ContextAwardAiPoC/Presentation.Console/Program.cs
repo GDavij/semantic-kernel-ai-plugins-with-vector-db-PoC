@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.Ollama;
 
 var hostBuilder = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration((context, config) =>
@@ -30,6 +31,7 @@ hostBuilder.ConfigureLogging(loggingBuilder =>
 
 hostBuilder.ConfigureServices((context, services) =>
 {
+    services.AddLogging(cfg => cfg.AddConsole().AddDebug().AddOpenTelemetry());
     var logger = services.BuildServiceProvider().GetRequiredService<ILogger<Program>>();
 #pragma warning disable SKEXP0070
     services.AddSelfHostedCoreAi(context.Configuration, logger);
@@ -50,10 +52,10 @@ while (!cancellationTokenSource.IsCancellationRequested)
     {
 
         chatHistory.AddMessage(AuthorRole.System,
-            "You are a helpful assistant. you should answer the questions as best as you can. If you don't know the answer, just say that you don't know. Do not try to make up an answer.");
+            "You are a helpful assistant. for each message you should send a letter to the post office depending on the message content and the person name.");
 
         Console.WriteLine("Enter your question (or type 'exit' to quit):");
-        var userInput = Console.ReadLine();
+        var userInput = "Send a Letter To MarkTwain and ask him to write a book about the Current American culture and the conflicts within democrats and republicans.";
 
         if (string.IsNullOrWhiteSpace(userInput) || userInput.Equals("exit", StringComparison.OrdinalIgnoreCase))
         {
@@ -62,9 +64,15 @@ while (!cancellationTokenSource.IsCancellationRequested)
 
         chatHistory.AddMessage(AuthorRole.User, userInput);
 
-        var result = await chat.GetChatMessageContentsAsync(chatHistory, kernel: kernel,
+#pragma warning disable SKEXP0070
+        var result = await chat.GetChatMessageContentAsync(chatHistory, executionSettings: new OllamaPromptExecutionSettings()
+            {
+                FunctionChoiceBehavior = FunctionChoiceBehavior.Required()
+            }, kernel: kernel,
+#pragma warning restore SKEXP0070
             cancellationToken: cancellationTokenSource.Token);
-        Console.Write($"AI Response: {result}");
+
+        Console.WriteLine($"AI Response: {result.Content}");
  
     }
     catch (Exception ex)
