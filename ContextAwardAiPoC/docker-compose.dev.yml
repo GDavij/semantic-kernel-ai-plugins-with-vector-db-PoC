@@ -17,3 +17,25 @@ services:
       - vector-store-weaviate
       - ollama
     
+  presentation-realtime:
+    container_name: presentation-realtime
+    build:
+      context: .
+      dockerfile: ./Presentation.RealTime/Dockerfile
+    ports:
+      - 8081:443
+    environment:
+      ASPNETCORE_ENVIRONMENT: 'development'
+    networks: 
+      - ollama-network
+    depends_on:
+      - vector-store-weaviate
+      - ollama
+
+  presentation-ui:
+    container_name: presentation-ui
+    build:
+      context: .
+      dockerfile: ./Presentation.Ui/Dockerfile
+    networks:
+      - ollama-network

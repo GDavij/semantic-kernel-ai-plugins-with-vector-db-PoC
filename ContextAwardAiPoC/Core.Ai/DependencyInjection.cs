@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Core.Ai.Constants;
 using Core.Ai.Extensions;
-using Core.Ai.Plugins;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -36,7 +35,6 @@ public static class DependencyInjection
 
         var weaviateUrl = configuration.GetOrThrowValueForKey<string>(WeaviateRequirements.DatabaseUrl);
 
-        services.AddWeaviateVectorStore(new Uri(weaviateUrl), apiKey: null);
         services.BuildPlugins();
 
         services.AddTransient(sp => BuildKernel(sp));
@@ -49,12 +47,10 @@ public static class DependencyInjection
     private static IServiceCollection BuildPlugins(this IServiceCollection services)
     {
         // Register PostOfficePlugin with DI so ILogger<PostOfficePlugin> is resolved
-        services.AddScoped<PostOfficePlugin>();
         services.AddTransient(sp =>
         {
             KernelPluginCollection plugins = [];
 
-            plugins.AddFromObject(sp.GetRequiredService<PostOfficePlugin>());
 
             return plugins;
         });

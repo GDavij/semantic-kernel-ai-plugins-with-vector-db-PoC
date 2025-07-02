@@ -22,4 +22,8 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Infra.Weaviate\Infra.Weaviate.csproj" />
+    </ItemGroup>
+
 </Project>
