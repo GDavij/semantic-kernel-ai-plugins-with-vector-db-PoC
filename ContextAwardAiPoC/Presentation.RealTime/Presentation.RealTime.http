@@ -1,6 +1,0 @@
-@Presentation.RealTime_HostAddress = http://localhost:5263
-
-GET {{Presentation.RealTime_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
